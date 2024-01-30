@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-fran <ade-fran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 14:12:35 by ade-fran          #+#    #+#             */
-/*   Updated: 2023/11/21 14:12:36 by ade-fran         ###   ########.fr       */
+/*   Created: 2023/11/22 16:24:50 by ade-fran          #+#    #+#             */
+/*   Updated: 2023/11/22 16:24:55 by ade-fran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+void	ft_lstiter(t_list *lst, void (*f)(int))
 {
-	if (!lst)
-		return (NULL);
-	while (lst->next)
+	if (!lst || !f)
+		return ;
+	while (lst)
 	{
+		f(lst->data);
 		lst = lst->next;
 	}
-	return (lst);
 }

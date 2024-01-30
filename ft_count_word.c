@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*   ft_count_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-fran <ade-fran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:50:46 by ade-fran          #+#    #+#             */
-/*   Updated: 2023/11/21 15:51:51 by ade-fran         ###   ########.fr       */
+/*   Created: 2024/01/19 12:33:37 by ade-fran          #+#    #+#             */
+/*   Updated: 2024/01/19 12:33:41 by ade-fran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
+size_t	ft_count_word(char const *s, char c)
 {
-	if (!lst || !del)
-		return ;
-	del(lst->content);
-	free(lst);
+	size_t	i;
+	size_t	count;
+
+	count = 0;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] != c)
+		{
+			count++;
+			while (s[i] && s[i] != c)
+				i++;
+			i--;
+		}
+		i++;
+	}
+	return (count);
 }

@@ -14,17 +14,19 @@
 
 static int	size_nbr(int n)
 {
-	int	i;
+	int			i;
+	long int	num;
 
 	i = 0;
-	if (n <= 0)
+	num = n;
+	if (num <= 0)
 	{
-		n *= (-1);
+		num *= (-1);
 		i++;
 	}
-	while (n)
+	while (num)
 	{
-		n /= 10;
+		num /= 10;
 		i++;
 	}
 	return (i);

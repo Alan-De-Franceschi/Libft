@@ -12,7 +12,7 @@
 
 NAME = libft.a
 
-MY_SOURCES = ft_atoi.c ft_isalpha.c ft_memchr.c \
+SOURCES = ft_atoi.c ft_isalpha.c ft_memchr.c \
 			ft_memset.c ft_strlcpy.c ft_strrchr.c \
 			ft_bzero.c ft_isascii.c ft_memcmp.c \
 			ft_strchr.c ft_strlen.c ft_tolower.c \
@@ -23,17 +23,15 @@ MY_SOURCES = ft_atoi.c ft_isalpha.c ft_memchr.c \
 			ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 			ft_substr.c ft_strjoin.c ft_itoa.c \
 			ft_strtrim.c ft_split.c ft_strmapi.c \
-			ft_striteri.c
+			ft_striteri.c ft_putnbr_base_fd.c ft_putptr.c \
+			ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
+			ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
+			ft_lstclear.c ft_lstiter.c ft_lstmap.c \
+			ft_printf.c ft_print_list.c ft_lstdelfirst.c \
+			ft_count_word.c ft_free_strtab.c ft_get_next_line.c \
+			ft_check_new_line.c
 
-SOURCES_BONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
-				ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
-				ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
-
-MY_OBJECTS = $(MY_SOURCES:.c=.o)
-
-OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
-
-HEADER = libft.h
+OBJECTS = $(SOURCES:.c=.o)
 
 CFLAGS = -Wall -Wextra -Werror
 
@@ -41,17 +39,14 @@ CC = cc
 
 all: $(NAME)
 
-$(NAME): $(MY_OBJECTS)
-	ar -rcs $(NAME) $(MY_OBJECTS)
-
-bonus: all $(OBJECTS_BONUS)
-	ar -rcs $(NAME) $(OBJECTS_BONUS)
+$(NAME) : $(OBJECTS)
+	ar -rcs $(NAME) $(OBJECTS)
 
 clean: 
-	rm -f $(MY_OBJECTS)
+	rm -f $(OBJECTS)
 
 fclean: 
-	rm -f $(NAME) $(MY_OBJECTS) $(OBJECTS_BONUS)
+	rm -f $(NAME) $(OBJECTS)
 
 re: fclean all
 

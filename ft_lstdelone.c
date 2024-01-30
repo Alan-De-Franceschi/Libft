@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-fran <ade-fran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 13:34:16 by ade-fran          #+#    #+#             */
-/*   Updated: 2023/11/14 13:34:20 by ade-fran         ###   ########.fr       */
+/*   Created: 2023/11/21 15:50:46 by ade-fran          #+#    #+#             */
+/*   Updated: 2023/11/21 15:51:51 by ade-fran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putchar_fd(char c, int fd)
+void	ft_lstdelone(t_list *lst)
 {
-	write(fd, &c, 1);
-	return (1);
+	if (!lst)
+		return ;
+	free(lst);
 }

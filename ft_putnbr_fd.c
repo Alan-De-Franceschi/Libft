@@ -12,7 +12,27 @@
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+static int	nbr_size(int n)
+{
+	int			count;
+	long int	num;
+
+	count = 0;
+	num = n;
+	if (num <= 0)
+	{
+		num *= (-1);
+		count++;
+	}
+	while (num)
+	{
+		num /= 10;
+		count++;
+	}
+	return (count);
+}
+
+int	ft_putnbr_fd(int n, int fd)
 {
 	long int	i;
 	char		a;
@@ -37,4 +57,5 @@ void	ft_putnbr_fd(int n, int fd)
 		b = b + (i % 10);
 		write(fd, &b, 1);
 	}
+	return (nbr_size(n));
 }

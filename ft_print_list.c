@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_print_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-fran <ade-fran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 16:24:50 by ade-fran          #+#    #+#             */
-/*   Updated: 2023/11/22 16:24:55 by ade-fran         ###   ########.fr       */
+/*   Created: 2024/01/17 14:36:18 by ade-fran          #+#    #+#             */
+/*   Updated: 2024/01/17 14:36:19 by ade-fran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_print_list(t_list *lst)
 {
-	if (!lst || !f)
-		return ;
 	while (lst)
 	{
-		f(lst->content);
+		ft_printf("[%d]->", lst->data);
 		lst = lst->next;
 	}
+	if (!lst)
+		ft_printf("[NULL]");
+	ft_printf("\n");
 }

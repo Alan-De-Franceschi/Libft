@@ -12,28 +12,7 @@
 
 #include "libft.h"
 
-static size_t	count_word(char const *s, char c)
-{
-	size_t	i;
-	size_t	count;
-
-	count = 0;
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] != c)
-		{
-			count++;
-			while (s[i] && s[i] != c)
-				i++;
-			i--;
-		}
-		i++;
-	}
-	return (count);
-}
-
-static char	*get_word(char const *s, char c, size_t *p)
+static char	*ft_get_word(char const *s, char c, size_t *p)
 {
 	size_t		l;
 	size_t		i;
@@ -58,7 +37,7 @@ static char	*get_word(char const *s, char c, size_t *p)
 	return (word);
 }
 
-static void	free_word(char **tab, size_t index_err)
+static void	ft_free_word(char **tab, size_t index_err)
 {
 	size_t	i;
 
@@ -70,7 +49,7 @@ static void	free_word(char **tab, size_t index_err)
 	}
 }
 
-static size_t	fill_tab(char **tab, const char *s, size_t nb_word, char c)
+static size_t	ft_fill_tab(char **tab, const char *s, size_t nb_word, char c)
 {
 	size_t	i;
 	size_t	z;
@@ -79,10 +58,10 @@ static size_t	fill_tab(char **tab, const char *s, size_t nb_word, char c)
 	z = 0;
 	while (i < nb_word)
 	{
-		tab[i] = get_word(s, c, &z);
+		tab[i] = ft_get_word(s, c, &z);
 		if (!tab[i])
 		{
-			free_word(tab, i);
+			ft_free_word(tab, i);
 			return (1);
 		}
 		i++;
@@ -99,11 +78,13 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	nb_word = count_word(s, c);
+	nb_word = ft_count_word(s, c);
+	if (nb_word == 0)
+		return (NULL);
 	tab = malloc(sizeof(char *) * (nb_word + 1));
 	if (!tab)
 		return (NULL);
-	err = fill_tab(tab, s, nb_word, c);
+	err = ft_fill_tab(tab, s, nb_word, c);
 	if (err)
 	{
 		free(tab);

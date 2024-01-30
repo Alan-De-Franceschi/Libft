@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_check_new_line.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-fran <ade-fran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 13:34:16 by ade-fran          #+#    #+#             */
-/*   Updated: 2023/11/14 13:34:20 by ade-fran         ###   ########.fr       */
+/*   Created: 2024/01/29 16:30:30 by ade-fran          #+#    #+#             */
+/*   Updated: 2024/01/29 16:30:31 by ade-fran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putchar_fd(char c, int fd)
+size_t	ft_check_new_line(const char *s, int c)
 {
-	write(fd, &c, 1);
-	return (1);
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+	{
+		if (s[i] == (unsigned char)c)
+		{
+			return (i + 1);
+		}
+		i++;
+	}
+	if (s[i] == (unsigned char)c)
+	{
+		return (i + 1);
+	}
+	return (0);
 }
