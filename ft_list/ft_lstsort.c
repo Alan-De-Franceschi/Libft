@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstsort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-fran <ade-fran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 13:50:23 by ade-fran          #+#    #+#             */
-/*   Updated: 2023/11/14 13:50:25 by ade-fran         ###   ########.fr       */
+/*   Created: 2024/03/04 12:52:24 by ade-fran          #+#    #+#             */
+/*   Updated: 2024/03/04 12:52:27 by ade-fran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putstr_fd(char *s, int fd)
+t_list	*ft_lstsort(t_list *lst)
 {
-	int	i;
+	int		int_temp;
+	t_list	*tmp;
 
-	i = 0;
-	if (!s)
-		return (ft_putstr_fd("(null)", fd));
-	while (s[i])
+	tmp = lst;
+	while (lst->next)
 	{
-		write(fd, &s[i], 1);
-		i++;
+		if (lst->data > lst->next->data)
+		{
+			int_temp = lst->data;
+			lst->data = lst->next->data;
+			lst->next->data = int_temp;
+			lst = tmp;
+		}
+		else
+			lst = lst->next;
 	}
-	return (ft_strlen(s));
+	lst = tmp;
+	return (lst);
 }

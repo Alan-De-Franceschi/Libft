@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_count_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-fran <ade-fran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 13:57:37 by ade-fran          #+#    #+#             */
-/*   Updated: 2023/11/14 13:57:39 by ade-fran         ###   ########.fr       */
+/*   Created: 2024/01/19 12:33:37 by ade-fran          #+#    #+#             */
+/*   Updated: 2024/01/19 12:33:41 by ade-fran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+size_t	ft_count_word(char const *s, char *charset)
 {
-	int	i;
+	size_t	i;
+	size_t	count;
 
+	count = 0;
 	i = 0;
-	if (!s)
-		return ;
 	while (s[i])
 	{
-		write(fd, &s[i], 1);
+		if (!ft_in_charset(charset, s[i]))
+		{
+			count++;
+			while (s[i] && !ft_in_charset(charset, s[i]))
+				i++;
+			i--;
+		}
 		i++;
 	}
-	write(fd, "\n", 1);
+	return (count);
 }

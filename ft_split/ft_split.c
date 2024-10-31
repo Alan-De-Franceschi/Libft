@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static char	*ft_get_word(char const *s, char c, size_t *p)
+static char	*ft_get_word(char const *s, char *charset, size_t *p)
 {
 	size_t		l;
 	size_t		i;
@@ -20,9 +20,9 @@ static char	*ft_get_word(char const *s, char c, size_t *p)
 
 	l = 0;
 	i = 0;
-	while (s[*p] && s[*p] == c)
+	while (s[*p] && ft_in_charset(charset, s[*p]))
 		(*p)++;
-	while (s[*p + l] && s[*p + l] != c)
+	while (s[*p + l] && !ft_in_charset(charset, s[*p + l]))
 		l++;
 	word = malloc(sizeof (char) * (l + 1));
 	if (!word)
@@ -49,16 +49,16 @@ static void	ft_free_word(char **tab, size_t index_err)
 	}
 }
 
-static size_t	ft_fill_tab(char **tab, const char *s, size_t nb_word, char c)
+static size_t	ft_fill_tab(char **tab, char const *s, size_t n, char *charset)
 {
 	size_t	i;
 	size_t	z;
 
 	i = 0;
 	z = 0;
-	while (i < nb_word)
+	while (i < n)
 	{
-		tab[i] = ft_get_word(s, c, &z);
+		tab[i] = ft_get_word(s, charset, &z);
 		if (!tab[i])
 		{
 			ft_free_word(tab, i);
@@ -70,7 +70,7 @@ static size_t	ft_fill_tab(char **tab, const char *s, size_t nb_word, char c)
 	return (0);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char *charset)
 {
 	char	**tab;
 	size_t	nb_word;
@@ -78,13 +78,13 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	nb_word = ft_count_word(s, c);
+	nb_word = ft_count_word(s, charset);
 	if (nb_word == 0)
 		return (NULL);
 	tab = malloc(sizeof(char *) * (nb_word + 1));
 	if (!tab)
 		return (NULL);
-	err = ft_fill_tab(tab, s, nb_word, c);
+	err = ft_fill_tab(tab, s, nb_word, charset);
 	if (err)
 	{
 		free(tab);

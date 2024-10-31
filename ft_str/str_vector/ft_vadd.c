@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_vadd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-fran <ade-fran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 17:03:13 by ade-fran          #+#    #+#             */
-/*   Updated: 2023/11/10 17:03:16 by ade-fran         ###   ########.fr       */
+/*   Created: 2024/09/21 17:05:28 by ade-fran          #+#    #+#             */
+/*   Updated: 2024/09/21 17:05:29 by ade-fran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_vadd(t_vector **vector, char *element)
 {
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
+	if ((*vector)->size == (*vector)->capacity)
 	{
-		i++;
+		(*vector)->array = ft_vealloc((*vector));
+		if (!(*vector)->array)
+		{
+			free((*vector));
+			(*vector) = NULL;
+			return (EXIT_FAILURE);
+		}
+		(*vector)->array[(*vector)->size] = element;
 	}
-	return (i);
+	else
+		(*vector)->array[(*vector)->size] = element;
+	++(*vector)->size;
+	(*vector)->array[(*vector)->capacity] = NULL;
+	return (EXIT_SUCCESS);
 }

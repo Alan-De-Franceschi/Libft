@@ -10,43 +10,147 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME			=	libft.a
 
-SOURCES = ft_atoi.c ft_isalpha.c ft_memchr.c \
-			ft_memset.c ft_strlcpy.c ft_strrchr.c \
-			ft_bzero.c ft_isascii.c ft_memcmp.c \
-			ft_strchr.c ft_strlen.c ft_tolower.c \
-			ft_calloc.c ft_isdigit.c ft_memcpy.c \
-			ft_strdup.c ft_strncmp.c ft_toupper.c \
-			ft_isalnum.c ft_isprint.c ft_memmove.c \
-			ft_strlcat.c ft_strnstr.c ft_putchar_fd.c \
-			ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-			ft_substr.c ft_strjoin.c ft_itoa.c \
-			ft_strtrim.c ft_split.c ft_strmapi.c \
-			ft_striteri.c ft_putnbr_base_fd.c ft_putptr.c \
-			ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
-			ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
-			ft_lstclear.c ft_lstiter.c ft_lstmap.c \
-			ft_printf.c ft_print_list.c ft_lstdelfirst.c \
-			ft_count_word.c ft_free_strtab.c ft_get_next_line.c \
-			ft_check_new_line.c
+LIB_PATH		=	lib/
 
-OBJECTS = $(SOURCES:.c=.o)
+CFLAGS			=	-Wall -Wextra -Werror -I ${INCLD_DIR} -g3
 
-CFLAGS = -Wall -Wextra -Werror
+CC				=	cc
 
-CC = cc
+RM 				=	rm -rf
 
-all: $(NAME)
+# **************************************************************************** #
+#                                                                              #
+#                                  COLORS                                      #
+#                                                                              #
+# **************************************************************************** #
 
-$(NAME) : $(OBJECTS)
-	ar -rcs $(NAME) $(OBJECTS)
+COLOUR_GREEN	=	\033[0;32m
+
+YELLOW			=	\033[0;33m
+
+COLOUR_END		=	\033[0m
+
+# **************************************************************************** #
+#                                                                              #
+#                                  SOURCES                                     #
+#                                                                              #
+# **************************************************************************** #
+
+SOURCES_PATH	=	./
+
+SOURCES_STR		=	ft_str/ft_strlcpy.c \
+					ft_str/ft_strrchr.c \
+					ft_str/ft_strchr.c \
+					ft_str/ft_strlen.c \
+					ft_str/ft_strdup.c \
+					ft_str/ft_strncmp.c \
+					ft_str/ft_strlcat.c \
+					ft_str/ft_strnstr.c \
+					ft_str/ft_strjoin.c \
+					ft_str/ft_strtrim.c \
+					ft_str/ft_strmapi.c \
+					ft_str/ft_striteri.c \
+					ft_str/ft_substr.c \
+					ft_str/ft_isalpha.c \
+					ft_str/ft_isdigit.c \
+					ft_str/ft_isalnum.c \
+					ft_str/ft_isprint.c \
+					ft_str/ft_isascii.c \
+					ft_str/ft_tolower.c \
+					ft_str/ft_toupper.c \
+					ft_str/ft_in_charset.c \
+					ft_str/ft_strtab_len.c \
+					ft_str/str_vector/ft_vinit.c \
+					ft_str/str_vector/ft_vealloc.c \
+					ft_str/str_vector/ft_vadd.c \
+
+SOURCES_MEMORY	=	ft_memory/ft_memchr.c \
+					ft_memory/ft_memset.c \
+					ft_memory/ft_memcpy.c \
+					ft_memory/ft_memmove.c \
+					ft_memory/ft_memcmp.c \
+					ft_memory/ft_bzero.c \
+					ft_memory/ft_calloc.c \
+					ft_memory/ft_free_strtab.c \
+
+SOURCES_LIST	=	ft_list/ft_lstnew.c \
+					ft_list/ft_lstadd_front.c \
+					ft_list/ft_lstsize.c \
+					ft_list/ft_lstlast.c \
+					ft_list/ft_lstadd_back.c \
+					ft_list/ft_lstdelone.c \
+					ft_list/ft_lstclear.c \
+					ft_list/ft_lstiter.c \
+					ft_list/ft_lstmap.c \
+
+SOURCES_PRINT	=	ft_print/ft_putchar_fd.c \
+					ft_print/ft_putstr_fd.c \
+					ft_print/ft_putptr.c \
+					ft_print/ft_putendl_fd.c \
+					ft_print/ft_putnbr_fd.c \
+					ft_print/ft_putnbr_base_fd.c \
+					ft_print/ft_printf.c \
+
+SOURCES_INT		=	ft_int/ft_atoi.c \
+					ft_int/ft_itoa.c \
+
+SOURCES_GNL		=	ft_gnl/ft_get_next_line.c \
+					ft_gnl/ft_check_new_line.c \
+
+SOURCES_SPLIT	=	ft_split/ft_split.c \
+					ft_split/ft_count_word.c \
+
+# **************************************************************************** #
+#                                                                              #
+#                                  OBJECTS                                     #
+#                                                                              #
+# **************************************************************************** #
+
+OBJECTS_PATH	=	obj/
+
+OBJECTS			=	$(addprefix ${OBJECTS_PATH}, ${SOURCES_STR:.c=.o}) \
+					$(addprefix ${OBJECTS_PATH}, ${SOURCES_MEMORY:.c=.o}) \
+					$(addprefix ${OBJECTS_PATH}, ${SOURCES_LIST:.c=.o}) \
+					$(addprefix ${OBJECTS_PATH}, ${SOURCES_PRINT:.c=.o}) \
+					$(addprefix ${OBJECTS_PATH}, ${SOURCES_INT:.c=.o}) \
+					$(addprefix ${OBJECTS_PATH}, ${SOURCES_GNL:.c=.o}) \
+					$(addprefix ${OBJECTS_PATH}, ${SOURCES_SPLIT:.c=.o}) \
+
+# **************************************************************************** #
+#                                                                              #
+#                                  INCLUDES                                    #
+#                                                                              #
+# **************************************************************************** #
+
+INCLD_DIR		=	./inc/
+
+INCLD			=	${INCLD_DIR}libft.h
+
+# **************************************************************************** #
+#                                                                              #
+#                                  RULES                                       #
+#                                                                              #
+# **************************************************************************** #
+
+all: ${NAME}
+
+${NAME} : ${OBJECTS} ${INCLD}
+	@mkdir -p lib
+	@ar -rcs ${NAME} ${OBJECTS}
+	@mv ${NAME} ${LIB_PATH}
+
+${OBJECTS_PATH}%.o:	${SOURCES_PATH}%.c
+	@mkdir -p ${dir $@}
+	@${CC} ${CFLAGS} -c $< -o $@ && printf "\33[2K\r${YELLOW}Compiling Libft :${COLOUR_END} $@" 
 
 clean: 
-	rm -f $(OBJECTS)
+	@rm -rf ${OBJECTS_PATH}
 
 fclean: 
-	rm -f $(NAME) $(OBJECTS)
+	@rm -rf ${LIB_PATH} ${OBJECTS_PATH}
+	@echo "${COLOUR_GREEN}libft cleaned\n${COLOUR_END}"
 
 re: fclean all
 
